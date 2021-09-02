@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.webkit.CookieManager
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 
 class WebActivity : AppCompatActivity() {
@@ -18,6 +19,8 @@ class WebActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
         webView = findViewById(R.id.webView)
+
+
         openWebView()
     }
 
@@ -28,17 +31,19 @@ class WebActivity : AppCompatActivity() {
     }
 
     private fun getUrl(): String{
-        Log.i("TAG", "url.toString()")
-        val url = intent.getStringExtra("URL").toString()
+        Log.i(Utils.TAG, "url.toString()")
+        val url = intent.getStringExtra("url").toString()
         return url
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetJavaScriptEnabled")
     private fun openWebView(){
-        Log.i("TAG", "openWebView")
+        Log.i(Utils.TAG, "openWebView")
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView,true)
         webView.settings.javaScriptEnabled = true
-        Log.i("TAG", "url")
+        Log.i(Utils.TAG, getUrl())
+        webView.webViewClient = WebViewClient()
         webView.loadUrl(getUrl())
     }
 }
