@@ -158,7 +158,7 @@ class MyInitialActivity : AppCompatActivity() {
         val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
         urlConnection.setRequestProperty(
             "User-Agent",
-            System.getProperty("http.agent")
+            "Mozilla/5.0(Linux; U; Android 2.2; en-gb; LG-P500 Build/FRF91)"
         )
     }
 
